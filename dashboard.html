@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Learn Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="icon" type="image/png" href="img/icon 1.png">
+</head>
+<body>
+    <div class="full-screen">
+        <div class="container">
+            <!-- Navigation -->
+            <div class="nav">
+                <nav>
+                    <div class="logo">
+                        <i style="color: blue;" class="fa-solid fa-book-open"></i>
+                        <a href="index.html">Learn Hub</a>
+                    </div>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#courses">Courses</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                    </ul>
+                    <div class="buttons nav-buttons">
+                        <button class="button1" onclick="handleLogout()" style="background: #dc3545; color: white; border: 2px solid #dc3545;">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        </button>
+                    </div>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <!-- User Profile Section -->
+        <div class="profile-section">
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="profile-info">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 15px;">
+                        <div>
+                            <h2 id="userName">User</h2>
+                            <p id="userEmail">email@example.com</p>
+                        </div>
+                        <button class="logout-btn" onclick="handleLogout()" style="padding: 12px 25px; background: #dc3545; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; display: flex; align-items: center; gap: 8px; transition: all 0.3s;">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        </button>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <i class="fa-solid fa-book"></i>
+                            <span id="enrolledCount">0</span>
+                            <p>Enrolled Courses</p>
+                        </div>
+                        <div class="stat">
+                            <i class="fa-solid fa-certificate"></i>
+                            <span id="completedCount">0</span>
+                            <p>Completed Courses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Courses Section -->
+        <div class="courses-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-graduation-cap"></i> My Courses</h2>
+                <a href="index.html#courses" class="btn-browse">Browse More</a>
+            </div>
+            <div id="enrolledCourses" class="courses-grid">
+                <!-- Will be filled by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <h2><i class="fa-solid fa-chart-line"></i> Learning Progress</h2>
+            <div class="progress-cards">
+                <div class="progress-card">
+                    <i class="fa-solid fa-clock"></i>
+                    <h3>Learning Hours</h3>
+                    <p class="progress-value">0</p>
+                </div>
+                <div class="progress-card">
+                    <i class="fa-solid fa-tasks"></i>
+                    <h3>Completed Tasks</h3>
+                    <p class="progress-value">0</p>
+                </div>
+                <div class="progress-card">
+                    <i class="fa-solid fa-trophy"></i>
+                    <h3>Achievements</h3>
+                    <p class="progress-value">0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navButtons = document.querySelector('.nav-buttons');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                navButtons.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

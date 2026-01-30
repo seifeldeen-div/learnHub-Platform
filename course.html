@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details - Learn Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/course.css">
+    <link rel="icon" type="image/png" href="img/icon 1.png">
+</head>
+<body>
+    <div class="full-screen">
+        <div class="container">
+            <!-- Navigation -->
+            <div class="nav">
+                <nav>
+                    <div class="logo">
+                        <i style="color: blue;" class="fa-solid fa-book-open"></i>
+                        <a href="index.html">Learn Hub</a>
+                    </div>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#courses">Courses</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                    </ul>
+                    <div class="buttons nav-buttons">
+                        <button class="button1" onclick="window.location.href='dashboard.html'">
+                            <i class="fa-solid fa-user"></i> Dashboard
+                        </button>
+                    </div>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Details -->
+    <div class="course-details-container">
+        <div id="courseContent">
+            <!-- Will be filled by JavaScript -->
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Load course details
+        function loadCourseDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('id');
+            
+            if (!courseId) {
+                document.getElementById('courseContent').innerHTML = `
+                    <div class="error-message">
+                        <i class="fa-solid fa-exclamation-triangle"></i>
+                        <p>Course not found</p>
+                        <a href="index.html" class="btn-primary">Back to Home</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const course = getCourseById(courseId);
+            if (!course) {
+                document.getElementById('courseContent').innerHTML = `
+                    <div class="error-message">
+                        <i class="fa-solid fa-exclamation-triangle"></i>
+                        <p>Course not found</p>
+                        <a href="index.html" class="btn-primary">Back to Home</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const user = auth.getCurrentUser();
+            const isEnrolled = user && user.enrolledCourses.includes(courseId);
+
+            document.getElementById('courseContent').innerHTML = `
+                <div class="course-hero">
+                    <div class="course-image">
+                        <img src="${course.image}" alt="${course.title}">
+                    </div>
+                    <div class="course-info">
+                        <h1>${course.title}</h1>
+                        <p class="instructor">by ${course.instructor}</p>
+                        <div class="course-meta">
+                            <span><i class="fa-solid fa-star" style="color: gold;"></i> ${course.rating}</span>
+                            <span><i class="fa-solid fa-people-line"></i> ${course.students.toLocaleString()} students</span>
+                            <span><i class="fa-solid fa-clock"></i> ${course.duration}</span>
+                        </div>
+                        <div class="course-description">
+                            <p>${course.description}</p>
+                        </div>
+                        <div class="course-actions">
+                            ${isEnrolled ? `
+                                <button class="btn-enrolled" onclick="window.location.href='#lessons'">
+                                    <i class="fa-solid fa-play"></i> Continue Learning
+                                </button>
+                            ` : `
+                                <button class="btn-enroll" onclick="handleEnroll('${courseId}')">
+                                    <i class="fa-solid fa-cart-plus"></i> Enroll Now - $${course.price}
+                                </button>
+                            `}
+                            <button class="btn-wishlist">
+                                <i class="fa-regular fa-heart"></i> Add to Wishlist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="lessons" class="lessons-section">
+                    <h2><i class="fa-solid fa-list"></i> Course Content</h2>
+                    <div class="lessons-list">
+                        ${course.lessons && course.lessons.length > 0 ? 
+                            course.lessons.map((lesson, index) => `
+                                <div class="lesson-item ${isEnrolled ? 'enrolled' : 'locked'}">
+                                    <div class="lesson-number">${index + 1}</div>
+                                    <div class="lesson-content">
+                                        <h3>${lesson.title}</h3>
+                                        <p><i class="fa-solid fa-clock"></i> ${lesson.duration}</p>
+                                    </div>
+                                    ${isEnrolled ? `
+                                        <button class="btn-play" onclick="playLesson(${lesson.id})">
+                                            <i class="fa-solid fa-play"></i>
+                                        </button>
+                                    ` : `
+                                        <i class="fa-solid fa-lock"></i>
+                                    `}
+                                </div>
+                            `).join('') : 
+                            '<p class="no-lessons">Content is being prepared...</p>'
+                        }
+                    </div>
+                </div>
+
+                <div class="course-reviews">
+                    <h2><i class="fa-solid fa-comments"></i> Student Reviews</h2>
+                    <div class="reviews-list">
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-avatar">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                                <div class="reviewer-info">
+                                    <h4>Ahmed Mohamed</h4>
+                                    <div class="review-rating">
+                                        <i class="fa-solid fa-star" style="color: gold;"></i>
+                                        <i class="fa-solid fa-star" style="color: gold;"></i>
+                                        <i class="fa-solid fa-star" style="color: gold;"></i>
+                                        <i class="fa-solid fa-star" style="color: gold;"></i>
+                                        <i class="fa-solid fa-star" style="color: gold;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Great course! Very useful. The content is well-organized and the explanation is clear.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Play lesson
+        function playLesson(lessonId) {
+            alert(`Lesson ${lessonId} will be available soon!`);
+        }
+
+        // Load course details on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadCourseDetails);
+        } else {
+            loadCourseDetails();
+        }
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navButtons = document.querySelector('.nav-buttons');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                navButtons.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
