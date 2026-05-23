@@ -6,7 +6,7 @@ body {
 .dashboard-container {
     width: 90%;
     max-width: 1400px;
-    margin: 40px auto;
+    margin: 20px auto;
     padding: 20px;
 }
 
@@ -42,11 +42,43 @@ body {
 .profile-info {
     flex: 1;
     min-width: 250px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+
+    .all {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .allText {
+            margin-bottom: 15px;
+        }
+
+        .logout-btn {
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            letter-spacing: 1.5px !important;
+            background-color: #dc3545;
+            transition: 0.5s ease;
+            border-radius: 10px;
+            padding: 12px 25px;
+        }
+    }
+
 }
 
 .profile-info h2 {
+    text-transform: capitalize;
     color: #333;
-    margin-bottom: 10px;
+    /* margin-bottom: 5px; */
     font-size: 28px;
     cursor: pointer;
     display: inline-block;
@@ -65,7 +97,7 @@ body {
     display: none !important;
 }
 
-.profile-info > p {
+.profile-info>p {
     color: #666;
     margin-bottom: 20px;
     font-size: 16px;
@@ -94,14 +126,15 @@ body {
 
 .profile-stats {
     display: flex;
-    gap: 30px;
+    flex-direction: column;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
 .profile-stats .stat {
     display: flex;
     align-items: center;
-    gap: 10px;
+    /* gap: 10px; */
     padding: 15px 20px;
     background: #f5f5f5;
     border-radius: 10px;
@@ -110,12 +143,14 @@ body {
 .profile-stats .stat i {
     font-size: 24px;
     color: blue;
+    margin-right: 5px;
 }
 
 .profile-stats .stat span {
     font-size: 24px;
     font-weight: bold;
     color: #333;
+    margin-right: 5px;
 }
 
 .profile-stats .stat p {
@@ -202,7 +237,7 @@ body {
     font-size: 20px;
 }
 
-.course-info > p {
+.course-info>p {
     color: #666;
     margin-bottom: 15px;
     font-size: 14px;
@@ -365,3 +400,24 @@ body {
     }
 }
 
+@media screen and (max-width:505px) {
+    .dashboard-container {
+        .profile-section {
+            .profile-card {
+                .profile-info {
+                    justify-content: center;
+                    gap: 20px;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width:320px) {
+    .dashboard-container {
+        .profile-section {
+            .profile-card {
+                padding: 12px;
+            }
+        }
+    }
+}

@@ -34,7 +34,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 20;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
 }
 
 .container .nav {
@@ -43,7 +43,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 20;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
 }
 
 nav {
@@ -85,7 +85,8 @@ nav .logo {
 nav .logo a {
     text-decoration: none;
     color: blue;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 600;
     font-family: Arial, Helvetica, sans-serif;
     animation: p-animate 2s linear forwards;
 }
@@ -263,6 +264,12 @@ nav .buttons .button2:hover,
 .container nav .buttons .button2:hover {
     background-color: transparent;
     color: blue;
+}
+
+nav .button1 {
+    border-radius: 50px;
+    width: 80%;
+    margin: auto;
 }
 
 /* Hamburger Menu */
@@ -466,7 +473,7 @@ main .features {
 
 .features .boxs .box {
     width: 100%;
-    max-width: 400px;
+    /* max-width: 400px; */
     border: 1px solid rgb(0 0 0 /0.1);
     border-radius: 20px;
     padding: 30px 20px;
@@ -561,7 +568,7 @@ main .courses {
 .courses .boxs .box {
     width: 100%;
     height: 100%;
-    max-width: 400px;
+    /* max-width: 400px; */
     border-radius: 20px;
     overflow: hidden;
     transition: 0.5s ease;
@@ -912,7 +919,7 @@ main footer .copy-rights {
 @media (max-width: 1024px) {
     .container nav {
         width: 100%;
-        padding: 10px 15px;
+        padding: 15px;
     }
 
     .container header .header-content {
@@ -939,7 +946,7 @@ main footer .copy-rights {
 
     .container header .photo {
         order: -1;
-        margin-bottom: 30px;
+        /* margin-bottom: 30px; */
     }
 
     .container header .photo img {
@@ -1018,33 +1025,60 @@ main footer .copy-rights {
         margin: 5px 0;
     }
 
+    nav .button1 {
+        width: 90% !important;
+        margin: 10px auto !important;
+    }
+
     .hamburger {
         display: flex;
+    }
+
+    .contact header .photo {
+        margin-bottom: 0;
     }
 
     .container header .right-side .p1 {
         font-size: 14px;
         max-width: 100%;
+        margin: 0;
     }
 
     .container header .right-side .p2 {
         font-size: 32px;
+        padding-top: 5px;
     }
 
     .container header .right-side .p3 {
         font-size: 20px;
     }
 
+    .container header .right-side .p4 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
     .container header .right-side .buttons {
         flex-direction: column;
         width: 100%;
+        padding-bottom: 0;
     }
 
     .container header .right-side .buttons .button1,
     .container header .right-side .buttons .button2 {
         width: 100%;
         max-width: 300px;
-        margin: 10px auto;
+        margin: 0 auto;
+    }
+
+    .container header .right-side .reactions {
+        .react {
+            margin: 0 20px;
+
+            p {
+                font-weight: 300;
+            }
+        }
     }
 
     .features .boxs {
@@ -1053,7 +1087,19 @@ main footer .copy-rights {
 
     .body-line-reactions {
         flex-direction: column;
-        gap: 30px;
+
+        /* gap: 50px; */
+        div {
+            border: solid;
+            border-radius: 10px;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 11px 5px rgb(0 0 0 / 0.2);
+        }
     }
 
     .courses .boxs {
@@ -1115,6 +1161,25 @@ main footer .copy-rights {
 
     .container header .photo img {
         max-width: 100%;
+    }
+
+    body .container header .reactions {
+        margin-top: 25px;
+
+        .react {
+            width: 100%;
+            /* margin-bottom: 3px !important; */
+            /* border: solid; */
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 5px 11px 3px rgb(0 0 0 / 0.1);
+
+            &:hover {
+                transform: translateY(5px);
+                box-shadow: none;
+                transition: 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+            }
+        }
     }
 
     .features .head h2,
